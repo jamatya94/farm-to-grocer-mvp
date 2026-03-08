@@ -14,13 +14,13 @@ export interface ButtonProps
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-[0_18px_40px_-18px_rgba(24,68,48,0.55)] hover:brightness-[1.03]",
+    "bg-[#1f6f43] !text-white shadow-[0_18px_40px_-22px_rgba(31,111,67,0.75)] hover:bg-[#185b36]",
   secondary:
-    "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:brightness-[1.02]",
+    "bg-[#2b8a57] !text-white shadow-[0_18px_40px_-22px_rgba(43,138,87,0.75)] hover:bg-[#217247]",
+  outline:
+    "border border-[hsl(var(--border))] bg-white/86 text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))]",
   ghost:
     "bg-transparent text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))]",
-  outline:
-    "border border-[hsl(var(--border))] bg-white/70 text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))]",
   soft:
     "bg-[hsl(var(--accent))] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent-strong))]",
 }
@@ -50,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={asChild ? undefined : type}
         className={cn(
-          "inline-flex items-center justify-center rounded-full font-medium tracking-[-0.01em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] disabled:pointer-events-none disabled:opacity-60",
+          "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-[-0.01em] no-underline [&_*]:text-inherit transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 hover:-translate-y-[1px] active:translate-y-0",
           variantStyles[variant],
           sizeStyles[size],
           className

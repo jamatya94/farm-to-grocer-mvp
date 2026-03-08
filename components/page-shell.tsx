@@ -34,7 +34,7 @@ export function PageShell({
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(245,250,243,0.96),rgba(250,246,236,0.96)_44%,rgba(245,240,231,0.98)_100%)]">
-      <div className="mx-auto max-w-7xl px-4 pb-14 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1720px] px-5 sm:px-6 lg:px-10">
         <header className="rounded-[30px] border border-white/60 bg-white/72 px-5 py-4 shadow-[0_35px_85px_-60px_rgba(20,35,28,0.45)] backdrop-blur-md">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-5">
