@@ -31,7 +31,7 @@ export default function BuyerDashboardPage() {
                   <p className="font-medium">{store.getVendorById(order.vendorId)?.name ?? 'Vendor'}</p>
                   <p className="text-sm text-[hsl(var(--muted-foreground))]">Delivery {formatDate(order.deliveryDate)}</p>
                 </div>
-                <StatusBadge status={order.status} />
+                <StatusBadge>{order.status}</StatusBadge>
               </Link>
             ))}
           </div>

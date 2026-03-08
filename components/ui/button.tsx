@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cn } from "@/lib/utils"
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "soft"
-type ButtonSize = "sm" | "md" | "lg"
+type ButtonSize = "sm" | "md" | "lg" | "icon-sm"
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,9 +26,10 @@ const variantStyles: Record<ButtonVariant, string> = {
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-9 px-4 text-sm",
+  sm: "h-10 px-4 text-sm",
   md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-base",
+  lg: "h-14 px-8 text-base",
+  "icon-sm": "h-9 w-9 p-0",
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
