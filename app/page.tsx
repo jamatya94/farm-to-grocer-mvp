@@ -1,65 +1,39 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { ArrowRight, Leaf, Store, Truck } from 'lucide-react'
+import { Brand } from '@/components/brand'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+      <div className="mx-auto max-w-7xl px-6 py-8">
+        <div className="flex items-center justify-between">
+          <Brand />
+          <Button asChild><Link href="/demo">Enter demo</Link></Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <section className="grid gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div>
+            <div className="text-sm uppercase tracking-[0.2em] text-[hsl(var(--muted-foreground))]">Premium · mission-led · Baltimore-rooted</div>
+            <h1 className="mt-4 max-w-3xl text-5xl font-semibold leading-tight tracking-tight">Relationship-based wholesale ordering for local vendors and independent grocers.</h1>
+            <p className="mt-6 max-w-2xl text-lg text-[hsl(var(--muted-foreground))]">Farm to Grocer is a B2B local food coordination platform built to make dependable local sourcing feel structured, modern, and repeatable.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button size="lg" asChild><Link href="/demo">View role-based demo</Link></Button>
+              <Button size="lg" variant="outline" asChild><Link href="/buyer/vendors/vendor-agriberry">See ordering flow <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
+            </div>
+          </div>
+          <Card className="overflow-hidden p-6">
+            <div className="rounded-[24px] bg-[linear-gradient(135deg,rgba(34,85,64,0.96),rgba(52,112,87,0.86))] p-6 text-[hsl(var(--primary-foreground))]">
+              <div className="text-sm uppercase tracking-[0.18em] opacity-80">How the MVP works</div>
+              <div className="mt-5 space-y-4">
+                <div className="flex gap-3"><Store className="mt-1 h-5 w-5" /><div><div className="font-medium">Connect approved vendors and grocers</div><div className="text-sm opacity-80">Keep sourcing relationship-first, not marketplace-chaotic.</div></div></div>
+                <div className="flex gap-3"><Leaf className="mt-1 h-5 w-5" /><div><div className="font-medium">Browse live availability</div><div className="text-sm opacity-80">Current products, simple volume logic, and readable delivery rules.</div></div></div>
+                <div className="flex gap-3"><Truck className="mt-1 h-5 w-5" /><div><div className="font-medium">Submit, modify, confirm, and track</div><div className="text-sm opacity-80">One order timeline visible across buyer, vendor, and admin views.</div></div></div>
+              </div>
+            </div>
+          </Card>
+        </section>
+      </div>
     </div>
-  );
+  )
 }
