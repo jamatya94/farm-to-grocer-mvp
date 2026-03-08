@@ -1,59 +1,143 @@
-import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
-export function StatCard({ label, value, tone = 'default' }: { label: string; value: string | number; tone?: 'default' | 'attention' | 'success' }) {
+type Tone = "default" | "success" | "attention" | "warning" | "danger"
+
+const toneMap: Record<Tone, string> = {
+  default: "bg-[hsl(var(--accent))] text-[hsl(var(--foreground))]",
+  success: "bg-emerald-100 text-emerald-900",
+  attention: "bg-amber-100 text-amber-900",
+  warning: "bg-orange-100 text-orange-900",
+  danger: "bg-rose-100 text-rose-900",
+}
+
+export function StatusBadge({
+  children,
+  tone = "default",
+  className,
+}: {
+  children: React.ReactNode
+  tone?: Tone
+  className?: string
+}) {
   return (
-    <Card className="p-5">
-      <div className="text-sm text-[hsl(var(--muted-foreground))]">{label}</div>
-      <div className={cn('mt-3 text-3xl font-semibold', tone === 'attention' && 'text-amber-700', tone === 'success' && 'text-emerald-700')}>{value}</div>
-    </Card>
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium capitalize tracking-[-0.01em]",
+        toneMap[tone],
+        className
+      )}
+    >
+      {children}
+    </span>
   )
 }
 
-export function SectionCard({ title, description, action, children }: { title: string; description?: string; action?: React.ReactNode; children: React.ReactNode }) {
+export function SectionCard({
+  title,
+  description,
+  action,
+  children,
+  className,
+}: {
+  title: string
+  description?: string
+  action?: React.ReactNode
+  children: React.ReactNode
+  className?: string
+}) {
   return (
-    <Card className="p-6">
-      <div className="flex items-start justify-between gap-4">
+    <section className={cn("rounded-[28px] border border-[hsl(var(--border))] bg-white/78 p-5 shadow-[0_30px_80px_-55px_rgba(20,35,28,0.35)] backdrop-blur-sm md:p-6", className)}>
+      <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          {description ? <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">{description}</p> : null}
+          <h2 className="text-lg font-semibold tracking-[-0.03em] text-[hsl(var(--foreground))]">{title}</h2>
+          {description ? (
+            <p className="mt-1 text-sm leading-6 text-[hsl(var(--muted-foreground))]">{description}</p>
+          ) : null}
         </div>
-        {action}
+        {action ? <div className="shrink-0">{action}</div> : null}
       </div>
-      <div className="mt-5">{children}</div>
-    </Card>
+      {children}
+    </section>
   )
 }
 
-export function StatusBadge({ status }: { status: string }) {
-  const cls =
-    status === 'confirmed' || status === 'approved' || status === 'delivered'
-      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-      : status === 'modified' || status === 'pending' || status === 'limited'
-        ? 'bg-amber-50 text-amber-700 border border-amber-200'
-        : status === 'canceled' || status === 'declined' || status === 'sold_out'
-          ? 'bg-rose-50 text-rose-700 border border-rose-200'
-          : 'bg-stone-100 text-stone-700 border border-stone-200'
-  return <Badge className={cls}>{status.replaceAll('_', ' ')}</Badge>
+export function StatCard({
+  label,
+  value,
+  tone = "default",
+}: {
+  label: string
+  value: string | number
+  tone?: Tone
+}) {
+  return (
+    <div className="rounded-[24px] border border-[hsl(var(--border))] bg-white/78 p-5 shadow-[0_25px_70px_-55px_rgba(20,35,28,0.35)] backdrop-blur-sm">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm text-[hsl(var(--muted-foreground))]">{label}</p>
+        <StatusBadge tone={tone}>{tone === "default" ? "Live" : tone}</StatusBadge>
+      </div>
+      <p className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[hsl(var(--foreground))]">{value}</p>
+    </div>
+  )
 }
 
-export function OrderTimeline({ events }: { events: Array<{ id: string; eventLabel: string; note?: string; createdAt: string }> }) {
+export function HeroMetric({
+  label,
+  value,
+}: {
+  label: string
+  value: string
+}) {
   return (
-    <div className="space-y-4">
-      {events.map((event, index) => (
-        <div key={event.id} className="flex gap-4">
-          <div className="flex flex-col items-center">
-            <div className="mt-1 h-2.5 w-2.5 rounded-full bg-[hsl(var(--primary))]" />
-            {index < events.length - 1 ? <div className="mt-2 h-full min-h-8 w-px bg-[hsl(var(--border))]" /> : null}
-          </div>
-          <div className="pb-4">
-            <div className="font-medium">{event.eventLabel}</div>
-            {event.note ? <div className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">{event.note}</div> : null}
-            <div className="mt-1 text-xs text-[hsl(var(--muted-foreground))]">{new Date(event.createdAt).toLocaleString()}</div>
-          </div>
+    <div className="rounded-2xl border border-white/50 bg-white/55 p-4 backdrop-blur-sm">
+      <p className="text-xs uppercase tracking-[0.12em] text-[hsl(var(--muted-foreground))]">{label}</p>
+      <p className="mt-2 text-xl font-semibold tracking-[-0.03em] text-[hsl(var(--foreground))]">{value}</p>
+    </div>
+  )
+}
+
+
+type TimelineEvent = {
+  id: string
+  eventLabel: string
+  note?: string
+  createdAt: string
+}
+
+export function OrderTimeline({
+  events,
+  className,
+}: {
+  events: TimelineEvent[]
+  className?: string
+}) {
+  return (
+    <div className={cn("space-y-3", className)}>
+      {events.length === 0 ? (
+        <div className="rounded-2xl border border-[hsl(var(--border))] bg-white/70 p-4 text-sm text-[hsl(var(--muted-foreground))]">
+          No timeline events yet.
         </div>
-      ))}
+      ) : (
+        events.map((event) => (
+          <div
+            key={event.id}
+            className="rounded-2xl border border-[hsl(var(--border))] bg-white/70 p-4"
+          >
+            <p className="font-medium text-[hsl(var(--foreground))]">
+              {event.eventLabel}
+            </p>
+            {event.note ? (
+              <p className="mt-1 text-sm text-[hsl(var(--muted-foreground))]">
+                {event.note}
+              </p>
+            ) : null}
+            <p className="mt-2 text-xs text-[hsl(var(--muted-foreground))]">
+              {new Date(event.createdAt).toLocaleString()}
+            </p>
+          </div>
+        ))
+      )}
     </div>
   )
 }
