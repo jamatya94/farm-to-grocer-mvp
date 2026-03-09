@@ -226,7 +226,7 @@ export const grocers: GrocerProfile[] = [
     receivingAddress: '900 N Charles St, Baltimore, MD',
     receivingDays: ['Tuesday', 'Thursday'],
     preferredDeliveryDays: ['Tuesday', 'Thursday'],
-    categoriesOfInterest: ['Greens & Salads', 'Herbs', 'Vegetables', 'Pantry'],
+    categoriesOfInterest: ['Greens & Salads', 'Herbs', 'Vegetables'],
   },
 ]
 
