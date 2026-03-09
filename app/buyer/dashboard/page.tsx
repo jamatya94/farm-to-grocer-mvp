@@ -23,10 +23,14 @@ export default function BuyerDashboardPage() {
         <StatCard label="Upcoming Deliveries" value={grocerOrders.filter((o) => o.status === 'confirmed').length} tone="success" />
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <SectionCard title="Attention queue" description="Only the next actions that matter.">
+       <SectionCard
+  title="Attention queue"
+  description="Only the next actions that matter."
+  className="border-amber-200/80 bg-[linear-gradient(145deg,rgba(255,251,235,0.96),rgba(255,244,214,0.90))] shadow-[0_24px_54px_-34px_rgba(180,120,20,0.26)]"
+>
           <div className="space-y-3">
             {grocerOrders.slice(0, 4).map((order) => (
-              <Link key={order.id} href={`/buyer/orders/${order.id}`} className="flex items-center justify-between rounded-2xl border border-[hsl(var(--border))] bg-white/70 p-4 hover:bg-[hsl(var(--accent))]">
+              <Link key={order.id} href={`/buyer/orders/${order.id}`} className="flex items-center justify-between rounded-[22px] border border-amber-200/70 bg-white/88 p-4 shadow-[0_14px_34px_-26px_rgba(180,120,20,0.18)] transition duration-200 hover:bg-amber-50/90">
                 <div>
                   <p className="font-medium">{store.getVendorById(order.vendorId)?.name ?? 'Vendor'}</p>
                   <p className="text-sm text-[hsl(var(--muted-foreground))]">Delivery {formatDate(order.deliveryDate)}</p>
